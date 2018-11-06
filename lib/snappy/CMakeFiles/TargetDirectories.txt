@@ -1,0 +1,9 @@
+/home/robin/compression_test/lib/snappy/CMakeFiles/list_install_components.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/install.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/rebuild_cache.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/edit_cache.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/test.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/snappy.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/snappy_unittest.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/install/local.dir
+/home/robin/compression_test/lib/snappy/CMakeFiles/install/strip.dir

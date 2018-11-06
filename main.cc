@@ -8,6 +8,7 @@
 #include "zlib.h"
 #include "ucl.h"
 #include "quicklz.h"
+#include "snappy.h"
 
 /*
  * Function to read the file data to compress/uncompress
@@ -66,7 +67,7 @@ int main(int argc, char **argv) {
   Zip *zip = nullptr;
 
   if (argc != 3) {
-    std::cout << "Format: ./binary filename compress_algo[minilzo = 1, zlib = 2, ucl = 3, quicklz = 4]" << std::endl;
+    std::cout << "Format: ./binary filename compress_algo[minilzo = 1, zlib = 2, ucl = 3, quicklz = 4, snappy = 5]" << std::endl;
     ret = 1;
     goto out;
   }
@@ -94,6 +95,9 @@ int main(int argc, char **argv) {
       break;
     case 4:
       zip = new Quicklz();
+      break;
+    case 5:
+      zip = new Snappy();
       break;
   }
   if (zip == nullptr) {
