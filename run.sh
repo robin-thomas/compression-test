@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Algorithm 1.
-./main data/20m 5
+./main data/10m 6
 exit
 ./main data/2m
 ./main data/3m

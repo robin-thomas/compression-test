@@ -9,6 +9,7 @@
 #include "ucl.h"
 #include "quicklz.h"
 #include "snappy.h"
+#include "lz4.h"
 
 /*
  * Function to read the file data to compress/uncompress
@@ -67,7 +68,7 @@ int main(int argc, char **argv) {
   Zip *zip = nullptr;
 
   if (argc != 3) {
-    std::cout << "Format: ./binary filename compress_algo[minilzo = 1, zlib = 2, ucl = 3, quicklz = 4, snappy = 5]" << std::endl;
+    std::cout << "Format: ./binary filename compress_algo[minilzo = 1, zlib = 2, ucl = 3, quicklz = 4, snappy = 5, lz4 = 6]" << std::endl;
     ret = 1;
     goto out;
   }
@@ -99,12 +100,17 @@ int main(int argc, char **argv) {
     case 5:
       zip = new Snappy();
       break;
+    case 6:
+      zip = new Lz4();
+      break;
   }
   if (zip == nullptr) {
     std::cerr << "[ERROR]: unrecognized compressoin method" << std::endl;
     ret = 1;
     goto out;
   }
+
+  std::cout << "Original size is: "<< buf.size() << std::endl;
 
   // Compress.
   compressed_size = buf.size();
@@ -120,6 +126,12 @@ int main(int argc, char **argv) {
   uncompressed = new unsigned char[buf.size()];
   if (zip->unzip(compressed, compressed_size, uncompressed, uncompressed_size) != 0) {
     std::cerr << "[ERROR]: unable to uncompress" << std::endl;
+    ret = 1;
+    goto out;
+  }
+
+  if (uncompressed_size != buf.size()) {
+    std::cerr << "[ERROR]: issue with compression/uncompress algo!" << std::endl;
     ret = 1;
     goto out;
   }
